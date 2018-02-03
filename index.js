@@ -23,6 +23,13 @@ let
   Link = mongoose.model("Link", linkSchema);
 
 app.use(bodyParser.json());
+app.use((request, response, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+});
 
 /** POST A NEW LINK OBJECT **/
 app.post("/", (request, response) => {
@@ -37,6 +44,7 @@ app.post("/", (request, response) => {
     return response.send(newLink); 
   });
 });
+
 /** UPDATING A SHORTURL **/
 app.put('/:shorturl', (request,response) => {
   Link.findOneAndUpdate({
