@@ -4,6 +4,7 @@ const
   mongoose = require('mongoose'),
   app = express();
 
+console.log(process.env.MONGO_URI);
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/acmlink');
 
 let
@@ -53,5 +54,5 @@ app.get('/:shorturl', (request, response) => {
   });
 });
 
-console.log("Server running on localhost:3000");
+console.log("Server running on localhost:" + process.env.PORT || 3000);
 app.listen(process.env.PORT || 3000);
