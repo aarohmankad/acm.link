@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "description": "API for acm@ucr link shortening service",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
