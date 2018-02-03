@@ -6,10 +6,17 @@ const
 
 mongoose.connect('mongodb://localhost/acmlink');
 
-let 
+let
 	linkSchema = mongoose.Schema({
-    shorturl: String,
-		longurl: String,
+    shorturl: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+		longurl: {
+      type: String,
+      required: true,
+    },
 	}),
   Link = mongoose.model("Link", linkSchema);
 
@@ -28,8 +35,6 @@ app.post("/", (request, response) => {
   });
 });
 
-
-
 app.get('/:shorturl', (request, response) => {
   Link.findOne({
     shorturl: request.params.shorturl,
@@ -47,9 +52,6 @@ app.get('/:shorturl', (request, response) => {
     return response.send(link);
   });
 });
-
-
-
 
 console.log("Server running on localhost:3000");
 app.listen(3000);
