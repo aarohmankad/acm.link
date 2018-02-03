@@ -16,7 +16,6 @@ let
 app.use(bodyParser.json());
 
 app.post("/", (request, response) => {
-  console.log(request.body);
   let link = new Link(request.body);
   link.save((err,newLink) => {
     if (err) {
@@ -25,12 +24,28 @@ app.post("/", (request, response) => {
         .send("Link couldn't be made", err);
     }
     
-    response.send(newLink); 
+    return response.send(newLink); 
   });
 });
 
+
+
 app.get('/:shorturl', (request, response) => {
-  response.redirect('http://google.com');
+  Link.findOne({
+    shorturl: request.params.shorturl,
+  }, (err, link) => {
+    if (err) {
+      return response
+        .status(500)
+        .send("Link couldn't be found", err);
+    } else if (!link) {
+      return response
+        .status(404)
+        .send("Link doesn't exist");
+    }
+
+    return response.send(link);
+  });
 });
 
 
