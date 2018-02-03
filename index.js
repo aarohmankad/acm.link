@@ -4,7 +4,7 @@ const
   mongoose = require('mongoose'),
   app = express();
 
-mongoose.connect('mongodb://localhost/acmlink');
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/acmlink');
 
 let
 	linkSchema = mongoose.Schema({
