@@ -1,0 +1,7 @@
+{
+  "name": "acmlink-api",
+  "version": "1.0.0",
+  "description": "API for acm@ucr link shortening service",
+  "main": "index.js",
+  "license": "MIT"
+}
